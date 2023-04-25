@@ -1,6 +1,5 @@
 package com.example.mytodo.page.create
 
-import android.content.ClipData
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -12,10 +11,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.mytodo.R
 import com.example.mytodo.databinding.CreateTodoFragmentBinding
 import com.google.android.material.snackbar.Snackbar
-import org.koin.android.ext.android.inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CreateToDoFragment : Fragment(R.layout.create_todo_fragment) {
-    private val vm: CreateToDoViewModel by inject()
+    private val vm: CreateToDoViewModel by viewModels()
 
     private var _binding: CreateTodoFragmentBinding? = null
     private val binding: CreateTodoFragmentBinding get() = _binding!!
@@ -28,7 +28,7 @@ class CreateToDoFragment : Fragment(R.layout.create_todo_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         this._binding = CreateTodoFragmentBinding.bind(view)
-        vm.errorMessage.observe(viewLifecycleOwner) {msg ->
+        vm.errorMessage.observe(viewLifecycleOwner) { msg ->
             if (msg.isEmpty()) return@observe
 
             Snackbar.make(requireView(), msg, Snackbar.LENGTH_SHORT).show()
@@ -50,6 +50,7 @@ class CreateToDoFragment : Fragment(R.layout.create_todo_fragment) {
                 save()
                 return true
             }
+
             else -> return super.onOptionsItemSelected(item)
         }
 
