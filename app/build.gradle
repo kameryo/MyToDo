@@ -66,6 +66,9 @@ dependencies {
     implementation 'androidx.room:room-ktx:2.5.1'
     kapt 'androidx.room:room-compiler:2.5.1'
 
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+
     def koin_android_version = "3.4.0"
     implementation "io.insert-koin:koin-core:$koin_android_version"
     implementation "io.insert-koin:koin-android:$koin_android_version"
