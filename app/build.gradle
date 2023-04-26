@@ -10,9 +10,6 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-kapt'
 
-
-
-
 android {
     namespace 'com.example.mytodo'
     compileSdk 33
@@ -72,5 +69,10 @@ dependencies {
     def koin_android_version = "3.4.0"
     implementation "io.insert-koin:koin-core:$koin_android_version"
     implementation "io.insert-koin:koin-android:$koin_android_version"
+
+    implementation "androidx.recyclerview:recyclerview:1.3.0"
+
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+
 
 }
