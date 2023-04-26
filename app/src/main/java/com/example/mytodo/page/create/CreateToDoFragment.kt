@@ -12,10 +12,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.mytodo.R
 import com.example.mytodo.databinding.CreateTodoFragmentBinding
 import com.google.android.material.snackbar.Snackbar
-import org.koin.android.ext.android.inject
 
 class CreateToDoFragment : Fragment(R.layout.create_todo_fragment) {
-    private val vm: CreateToDoViewModel by inject()
+    private val vm: CreateToDoViewModel by viewModels()
 
     private var _binding: CreateTodoFragmentBinding? = null
     private val binding: CreateTodoFragmentBinding get() = _binding!!
