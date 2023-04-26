@@ -12,7 +12,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.mytodo.R
 import com.example.mytodo.databinding.CreateTodoFragmentBinding
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CreateToDoFragment : Fragment(R.layout.create_todo_fragment) {
     private val vm: CreateToDoViewModel by viewModels()
 
