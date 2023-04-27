@@ -10,6 +10,7 @@ interface ToDoDAO {
 
     @Query("select * from ToDo order by created desc")
     fun getAll(): Flow<List<ToDo>>
+
     @Insert
     suspend fun create(todo: ToDo)
 

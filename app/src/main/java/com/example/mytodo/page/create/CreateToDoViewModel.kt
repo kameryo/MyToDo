@@ -11,7 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CreateToDoViewModel @Inject constructor(
     private val repo: ToDoRepository
-): ViewModel() {
+) : ViewModel() {
     val errorMessage = MutableLiveData<String>()
     val done = MutableLiveData<Boolean>()
 

@@ -1,5 +1,6 @@
 package com.example.mytodo.page.detail
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -13,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.mytodo.R
 import com.example.mytodo.databinding.TodoDetailFragmentBinding
 import com.example.mytodo.model.todo.ToDo
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,9 +30,15 @@ class ToDoDetailFragment : Fragment(R.layout.todo_detail_fragment) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
 
-        setFragmentResultListener("edit"){ _, data ->
-            val todo = data.getParcelable("todo") as? ToDo?: return@setFragmentResultListener
+        setFragmentResultListener("edit") { _, data ->
+            val todo = data.getParcelable("todo") as? ToDo ?: return@setFragmentResultListener
             vm.todo.value = todo
+        }
+        setFragmentResultListener("confirm") { _, data ->
+            val which = data.getInt("result")
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                vm.delete()
+            }
         }
         if (savedInstanceState == null) {
             vm.todo.value = args.todo
@@ -42,9 +50,22 @@ class ToDoDetailFragment : Fragment(R.layout.todo_detail_fragment) {
 
         this._binding = TodoDetailFragmentBinding.bind(view)
 
-        vm.todo.observe(viewLifecycleOwner) {todo ->
+        vm.todo.observe(viewLifecycleOwner) { todo ->
             binding.titleText.text = todo.title
             binding.detailText.text = todo.detail
+        }
+        vm.errorMessage.observe(viewLifecycleOwner) { msg ->
+            if (msg.isEmpty()) return@observe
+
+            Snackbar.make(requireView(), msg, Snackbar.LENGTH_SHORT).show()
+            vm.errorMessage.value = ""
+        }
+        vm.deleted.observe(viewLifecycleOwner) { deleted ->
+            if (deleted) {
+                findNavController().popBackStack(
+                    R.id.mainFragment, false
+                )
+            }
         }
     }
 
@@ -59,14 +80,21 @@ class ToDoDetailFragment : Fragment(R.layout.todo_detail_fragment) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.action_edit -> {
                 val todo1 = vm.todo.value ?: return true
                 val todo = todo1
-                val action = ToDoDetailFragmentDirections.actionToDoDetailFragmentToEditToDoFragment(
-                    args.todo
-                )
+                val action =
+                    ToDoDetailFragmentDirections.actionToDoDetailFragmentToEditToDoFragment(
+                        args.todo
+                    )
                 findNavController().navigate(action)
+                true
+            }
+            R.id.action_delete -> {
+                findNavController().navigate(
+                    R.id.action_toDoDetailFragment_to_confirmDialogFragment
+                )
                 true
             }
             else -> super.onOptionsItemSelected(item)

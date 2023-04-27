@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.mytodo.MainFragment"
-        android:label="MainFragment" >
+        android:label="MainFragment">
         <action
             android:id="@+id/action_mainFragment_to_createToDoFragment"
             app:destination="@id/createToDoFragment"
@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/editToDoFragment"
         android:name="com.example.mytodo.page.edit.EditToDoFragment"
-        android:label="EditToDoFragment" >
+        android:label="EditToDoFragment">
         <argument
             android:name="todo"
             app:argType="com.example.mytodo.model.todo.ToDo" />
@@ -38,7 +38,7 @@
     <fragment
         android:id="@+id/toDoDetailFragment"
         android:name="com.example.mytodo.page.detail.ToDoDetailFragment"
-        android:label="ToDoDetailFragment" >
+        android:label="ToDoDetailFragment">
         <action
             android:id="@+id/action_toDoDetailFragment_to_editToDoFragment"
             app:destination="@id/editToDoFragment"
@@ -49,5 +49,12 @@
         <argument
             android:name="todo"
             app:argType="com.example.mytodo.model.todo.ToDo" />
+        <action
+            android:id="@+id/action_toDoDetailFragment_to_confirmDialogFragment"
+            app:destination="@id/confirmDialogFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/confirmDialogFragment"
+        android:name="com.example.mytodo.dialog.ConfirmDialogFragment"
+        android:label="ConfirmDialogFragment" />
 </navigation>

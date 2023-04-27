@@ -17,7 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class EditToDoFragment:Fragment(R.layout.edit_todo_fragment) {
+class EditToDoFragment : Fragment(R.layout.edit_todo_fragment) {
     private val args: EditToDoFragmentArgs by navArgs()
 
     private val vm: EditToDoViewModel by viewModels()
@@ -38,12 +38,12 @@ class EditToDoFragment:Fragment(R.layout.edit_todo_fragment) {
         binding.titleEdit.setText(todo.title)
         binding.detailEdit.setText(todo.detail)
 
-        vm.errorMessage.observe(viewLifecycleOwner) {msg ->
-            if(msg.isEmpty()) return@observe
+        vm.errorMessage.observe(viewLifecycleOwner) { msg ->
+            if (msg.isEmpty()) return@observe
 
             Snackbar.make(requireView(), msg, Snackbar.LENGTH_SHORT).show()
         }
-        vm.done.observe(viewLifecycleOwner) {todo ->
+        vm.done.observe(viewLifecycleOwner) { todo ->
             setFragmentResult("edit", bundleOf("todo" to todo))
             findNavController().popBackStack()
         }

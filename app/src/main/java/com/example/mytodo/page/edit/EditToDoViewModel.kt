@@ -12,7 +12,7 @@ import javax.inject.Inject
 @HiltViewModel
 class EditToDoViewModel @Inject constructor(
     private val repo: ToDoRepository
-): ViewModel() {
+) : ViewModel() {
     val errorMessage = MutableLiveData<String>()
     val done = MutableLiveData<ToDo>()
     fun save(todo: ToDo, title: String, detail: String) {

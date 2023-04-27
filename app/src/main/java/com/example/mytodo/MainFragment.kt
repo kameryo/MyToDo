@@ -13,7 +13,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     private val vm: MainViewModel by viewModels()
 
     private var _binding: MainFragmentBinding? = null
-    private val binding: MainFragmentBinding  get() = _binding!!
+    private val binding: MainFragmentBinding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

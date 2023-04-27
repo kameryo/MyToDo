@@ -15,4 +15,4 @@ data class ToDo(
     val detail: String,
     val created: Long,
     val modified: Long
-): Parcelable
+) : Parcelable

@@ -29,7 +29,8 @@ class CreateToDoFragment : Fragment(R.layout.create_todo_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         this._binding = CreateTodoFragmentBinding.bind(view)
-        vm.errorMessage.observe(viewLifecycleOwner) {msg ->
+
+        vm.errorMessage.observe(viewLifecycleOwner) { msg ->
             if (msg.isEmpty()) return@observe
 
             Snackbar.make(requireView(), msg, Snackbar.LENGTH_SHORT).show()

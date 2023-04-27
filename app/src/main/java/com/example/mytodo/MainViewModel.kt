@@ -9,6 +9,6 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val repo: ToDoRepository
-): ViewModel() {
+) : ViewModel() {
     val todoList = repo.getAll().asLiveData()
 }

@@ -11,7 +11,7 @@ import com.example.mytodo.model.todo.ToDo
 
 class ToDoAdapter(
     private val listener: (ToDo) -> Unit
-): ListAdapter<ToDo, ToDoAdapter.ViewHolder>(callbacks) {
+) : ListAdapter<ToDo, ToDoAdapter.ViewHolder>(callbacks) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -19,7 +19,7 @@ class ToDoAdapter(
 
         val viewHolder = ViewHolder(binding)
 
-        binding.root.setOnClickListener{
+        binding.root.setOnClickListener {
             val position = viewHolder.bindingAdapterPosition
             val todo = getItem(position)
             listener(todo)
@@ -34,7 +34,7 @@ class ToDoAdapter(
 
     class ViewHolder(
         private val binding: TodoItemBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bindTo(todo: ToDo) {
             binding.titleText.text = todo.title
             binding.createdText.text = DateFormat.format(
@@ -46,7 +46,7 @@ class ToDoAdapter(
     }
 
     companion object {
-        private val callbacks = object: DiffUtil.ItemCallback<ToDo>() {
+        private val callbacks = object : DiffUtil.ItemCallback<ToDo>() {
             override fun areItemsTheSame(oldItem: ToDo, newItem: ToDo): Boolean {
                 return oldItem._id == newItem._id
             }
