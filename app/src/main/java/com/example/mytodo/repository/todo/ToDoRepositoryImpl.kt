@@ -9,13 +9,28 @@ import javax.inject.Inject
 
 class ToDoRepositoryImpl @Inject constructor(
     private val dao: ToDoDAO
-): ToDoRepository{
+) : ToDoRepository {
     override suspend fun create(title: String, detail: String) {
         val now = System.currentTimeMillis()
         val todo = ToDo(title = title, detail = detail, created = now, modified = now)
         withContext(Dispatchers.IO) {
             dao.create(todo)
         }
+    }
+
+    override suspend fun update(todo: ToDo, title: String, detail: String): ToDo {
+        val updateToDo = ToDo(
+            _id = todo._id,
+            title = title,
+            detail = detail,
+            created = todo.created,
+            modified = System.currentTimeMillis()
+        )
+        withContext(Dispatchers.IO) {
+            dao.update(updateToDo)
+        }
+
+        return updateToDo
     }
 
     override fun getAll(): Flow<List<ToDo>> {

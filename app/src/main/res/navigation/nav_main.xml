@@ -30,7 +30,11 @@
     <fragment
         android:id="@+id/editToDoFragment"
         android:name="com.example.mytodo.page.edit.EditToDoFragment"
-        android:label="EditToDoFragment" />
+        android:label="EditToDoFragment" >
+        <argument
+            android:name="todo"
+            app:argType="com.example.mytodo.model.todo.ToDo" />
+    </fragment>
     <fragment
         android:id="@+id/toDoDetailFragment"
         android:name="com.example.mytodo.page.detail.ToDoDetailFragment"
